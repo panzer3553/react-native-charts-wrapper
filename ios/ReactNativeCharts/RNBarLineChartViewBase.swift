@@ -47,7 +47,7 @@ class RNBarLineChartViewBase: RNYAxisChartViewBase {
     }
 
     func setBorderColor(_ color: Int) {
-        
+
         barLineChart.borderColor = RCTConvert.uiColor(color);
     }
 
@@ -113,6 +113,25 @@ class RNBarLineChartViewBase: RNYAxisChartViewBase {
         }
 
     }
+
+    func setViewPortOffsets(_ config: NSDictionary) {
+      let json = BridgeUtils.toJson(config)
+
+      if json["left"].exists() &&
+        json["top"].exists() &&
+        json["right"].exists() &&
+        json["bottom"].exists() {
+
+        barLineChart.setViewPortOffsets(
+          left: CGFloat(json["left"].floatValue),
+          top: CGFloat(json["top"].floatValue),
+          right: CGFloat(json["right"].floatValue),
+          bottom: CGFloat(json["bottom"].floatValue)
+        )
+      }
+
+    }
+
 
 
 }
